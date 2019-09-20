@@ -1,19 +1,18 @@
 #!/usr/bin/env ruby
 require 'fileutils'
 repo="#{ENV['HOME']}/dotfiles"
-case ARGV[0]
-when "apply"
-  Dir.chdir(repo) do
-    Dir.glob("**/*").select { |f| File.file? f }.each do |path|
-      dotted_path = path.gsub "__", "."
-      destination = File.join(ENV['HOME'], dotted_path)
-      if File.exists? destination
-        puts "  #{destination} already exists"
-      else
+Dir.chdir(repo) do
+  Dir.glob("**/*").select { |f| File.file? f }.each do |path|
+    dotted_path = path.gsub "__", "."
+    destination = File.join(ENV['HOME'], dotted_path)
+    if File.exists? destination
+      if not File.symlink? destination
+        puts "WARNING #{destination} already exists and is not a symlink"
+      end
+    else
         FileUtils.mkdir_p File.join(File.dirname(destination))
         File.symlink File.join(repo, path), destination
-        puts "-> linked #{destination}"
-      end
+        puts "INFO    linked #{destination}"
     end
   end
 end
