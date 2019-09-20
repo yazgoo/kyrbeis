@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'kyrbeis'
-  s.version     = '0.0.0'
+  s.version     = '0.0.1'
   s.date        = '2017-08-04'
   s.summary     = "dotfiles management"
   s.description = "Allows to manage your dotfiles in a centralized fashion"
