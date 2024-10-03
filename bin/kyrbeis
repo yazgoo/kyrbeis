@@ -7,7 +7,7 @@ Dir.chdir(repo) do
     dotted_path = path.gsub "__", "."
     erb = path.end_with?(".erb")
     destination = File.join(ENV['HOME'], dotted_path).gsub(/\.erb$/, "")
-    if not erb and File.exists? destination
+    if not erb and File.exist? destination
       if not File.symlink? destination
         puts "WARNING #{destination} already exists and is not a symlink"
       end
